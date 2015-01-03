@@ -28,9 +28,21 @@ public class MyPongModel implements PongModel{
     private Dimension fieldSize = new Dimension(1000, 1000);
     
     public void compute(Set<Input> input, long delta_t){
-        if (input.contains(BarKey.LEFT)){
-            /* check UP or DOWN */
-            
+        for (Input eachSet : input) {
+            if (eachSet.key.equals(BarKey.LEFT)) {
+                if (eachSet.dir.equals(Input.Dir.UP)) {
+                    this.barPosLeft -= 5;
+                } else {
+                    this.barPosLeft += 5;
+                }
+            }
+            if (eachSet.key.equals(BarKey.RIGHT)) {
+                if (eachSet.dir.equals(Input.Dir.UP)) {
+                    this.barPosRight -= 5;
+                } else {
+                    this.barPosRight += 5;
+                }
+            }
         }
         if(ballPosX == 980){
             if (((ballPosY-10) <= barPosRight+(barHeightRight/2)) && ((ballPosY+10) >= barPosRight-(barHeightRight/2))) {
