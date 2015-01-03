@@ -21,7 +21,7 @@ public class MyPongModel implements PongModel{
     private int ballPosX = 500;
     private int ballPosY = 500;
     private Point ballPos = new Point(ballPosX,ballPosY);
-    private String message;
+    private String message = "GAME ON!";
     private String scoreLeft = "0";
     private String scoreRight = "0";
     private int ballSpeed = 10;
