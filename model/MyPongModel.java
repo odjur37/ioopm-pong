@@ -3,6 +3,7 @@ package model;
 import java.awt.*;
 import java.util.Random;
 import java.util.Set;
+import java.lang.String;
 
 /**
  * Created by ErikWE on 02/01/15.
@@ -22,8 +23,10 @@ public class MyPongModel implements PongModel{
     private String message = "GAME ON!  ";
     private String scoreLeft = "0";
     private String scoreRight = "0";
-    private int ballSpeedX = 3;
-    private int ballSpeedY = 0;
+    private double ballSpeedX = 3;
+    private double ballSpeedY = 0;
+    private int curveBallCount = 0;
+    private String curveBallDirecrtion = "NONE";
     private Dimension fieldSize = new Dimension(1000, 1000);
     
     public void generateStartDirection () {
@@ -41,6 +44,68 @@ public class MyPongModel implements PongModel{
         }
         if (negOrPosX == 1) {
             this.ballSpeedX = this.ballSpeedX * -1;
+        }
+    }
+
+    public void decideCornerHit () {
+        if (((ballPosY - 10) <= barPosRight + (barHeightRight / 2)) &&
+                ((ballPosY - 10) >= (barPosRight + (barHeightRight / 2)) - 10) &&
+                (ballSpeedY <= 0)) {
+            this.ballSpeedY = this.ballSpeedY * -1;
+        }
+        if (((ballPosY + 10) >= barPosRight - (barHeightRight / 2)) &&
+                ((ballPosY + 10) <= (barPosRight - (barHeightRight / 2)) + 10) &&
+                (ballSpeedY >= 0)) {
+            this.ballSpeedY = this.ballSpeedY * -1;
+        }
+        if (((ballPosY - 10) <= barPosLeft + (barHeightLeft / 2)) &&
+                ((ballPosY - 10) >= (barPosLeft + (barHeightLeft / 2)) - 10) &&
+                (ballSpeedY <= 0)) {
+            this.ballSpeedY = this.ballSpeedY * -1;
+        }
+        if (((ballPosY + 10) >= barPosLeft - (barHeightLeft / 2)) &&
+                ((ballPosY + 10) <= (barPosLeft - (barHeightLeft / 2)) + 10) &&
+                (ballSpeedY >= 0)) {
+            this.ballSpeedY = this.ballSpeedY * -1;
+        }
+    }
+
+    public void decideCurveHit(Set<Input> input) {
+        if (((ballPosY - 10) <= barPosRight + (barHeightRight / 2)) &&
+                ((ballPosY + 10) >= barPosRight - (barHeightRight / 2))) {
+            for (Input eachSet : input) {
+                if (eachSet.key.equals(BarKey.LEFT)) {
+                    if (eachSet.dir.equals(Input.Dir.UP)) {
+                        this.curveBallCount = 100;
+                        this.curveBallDirecrtion = "DOWN";
+                    }else if (eachSet.dir.equals(Input.Dir.DOWN)) {
+                        this.curveBallCount = 100;
+                        this.curveBallDirecrtion = "UP";
+                    }
+                }
+                if (eachSet.key.equals(BarKey.RIGHT)) {
+                    if (eachSet.dir.equals(Input.Dir.UP)) {
+                        this.curveBallCount = 100;
+                        this.curveBallDirecrtion = "DOWN";
+                    }else if (eachSet.dir.equals(Input.Dir.DOWN)) {
+                        this.curveBallCount = 100;
+                        this.curveBallDirecrtion = "UP";
+                    }
+                }
+            }
+        }
+    }
+
+    public void curveBall (String direction) {
+        if (curveBallCount > 0) {
+            if (direction.equals("UP")){
+                this.ballSpeedY = this.ballSpeedY - 0.06;
+                this.curveBallCount = this.curveBallCount - 1;
+            }
+            if (direction.equals("DOWN")) {
+                this.ballSpeedY = this.ballSpeedY + 0.06;
+                this.curveBallCount = this.curveBallCount - 1;
+            }
         }
     }
     
@@ -73,8 +138,11 @@ public class MyPongModel implements PongModel{
                     }
                 }
             }
-            if (ballPosX == 980) {
-                if (((ballPosY - 10) <= barPosRight + (barHeightRight / 2)) && ((ballPosY + 10) >= barPosRight - (barHeightRight / 2))) {
+            if (ballPosX >= 980) {
+                if (((ballPosY - 10) <= barPosRight + (barHeightRight / 2)) &&
+                        ((ballPosY + 10) >= barPosRight - (barHeightRight / 2))) {
+                    decideCurveHit(input);
+                    decideCornerHit();
                     this.ballSpeedX = ((this.ballSpeedX) * -1);
                     setMessage(null);
                 } else {
@@ -88,8 +156,11 @@ public class MyPongModel implements PongModel{
                     this.genStartDir = true;
                 }
             }
-            if (ballPosX == 20) {
-                if (((ballPosY - 10) <= barPosLeft + (barHeightLeft / 2)) && ((ballPosY + 10) >= barPosLeft - (barHeightLeft / 2))) {
+            if (ballPosX <= 20) {
+                if (((ballPosY - 10) <= barPosLeft + (barHeightLeft / 2)) &&
+                        ((ballPosY + 10) >= barPosLeft - (barHeightLeft / 2))) {
+                    decideCurveHit(input);
+                    decideCornerHit();
                     this.ballSpeedX = ((this.ballSpeedX) * -1);
                     setMessage(null);
                 } else {
@@ -106,7 +177,7 @@ public class MyPongModel implements PongModel{
             if ((ballPosY >= 990)||(ballPosY <= 10)) {
                 this.ballSpeedY = this.ballSpeedY * -1;                
             }
-            
+            curveBall(curveBallDirecrtion);
             this.ballPosY += ballSpeedY;
             this.ballPosX += ballSpeedX;
             
