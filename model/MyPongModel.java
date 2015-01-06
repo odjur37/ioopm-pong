@@ -17,6 +17,7 @@ public class MyPongModel implements PongModel{
     private int barPosRight = 500;
     private int barHeightLeft = 150;
     private int barHeightRight = 150;
+    private double barSpeed = 5;
     private int ballPosX = 500;
     private int ballPosY = 500;
     private Point ballPos = new Point(ballPosX,ballPosY);
@@ -27,10 +28,11 @@ public class MyPongModel implements PongModel{
     private double ballSpeedY = 0;
     private int curveBallCount = 0;
     private int wallHitCount = 0;
+    private int barHitCount = 0;
     private String curveBallDirection = "NONE";
     private Dimension fieldSize = new Dimension(1000, 1000);
     
-    public void generateStartDirection () {
+    public void resetAfterScore() {
         this.ballSpeedX = 3;
         Random rand1 = new Random();
         int ySpeed = 0;
@@ -47,6 +49,7 @@ public class MyPongModel implements PongModel{
         if (negOrPosX == 1) {
             this.ballSpeedX = this.ballSpeedX * -1;
         }
+        this.barSpeed = 5;
     }
     
     public boolean barHit(String side){
@@ -141,9 +144,22 @@ public class MyPongModel implements PongModel{
         setMessage("GAME ON!");
     }
     
+    public void barHitCompute(Set<Input> input) {
+        //decideCurveHit(input);
+        decideCornerHit();
+        if (barHitCount == 0) {
+            this.ballSpeedY = this.ballSpeedY * 1.07;
+            this.ballSpeedX = this.ballSpeedX * 1.07;
+            this.ballSpeedX = ((this.ballSpeedX) * -1);
+            this.barSpeed = this.barSpeed * 1.05;
+            setMessage(null);
+            this.barHitCount += 50;
+        }
+    }
+    
     public void compute(Set<Input> input, long delta_t) {
         if (genStartDir){
-            generateStartDirection();
+            resetAfterScore();
             this.genStartDir = false;
         }
         Integer scoreLeftInt = Integer.parseInt(scoreLeft);
@@ -161,22 +177,22 @@ public class MyPongModel implements PongModel{
                 if (eachSet.key.equals(BarKey.LEFT)) {
                     if (eachSet.dir.equals(Input.Dir.UP)) {
                         if((barPosLeft - (barHeightLeft/2)) > 0) {
-                            this.barPosLeft -= 5;
+                            this.barPosLeft -= barSpeed;
                         }
                     } else {
                         if((barPosLeft + (barHeightLeft/2)) < 1000) {
-                            this.barPosLeft += 5;
+                            this.barPosLeft += barSpeed;
                         }
                     }
                 }
                 if (eachSet.key.equals(BarKey.RIGHT)) {
                     if (eachSet.dir.equals(Input.Dir.UP)) {
                         if ((barPosRight - (barHeightRight / 2)) > 0) {
-                            this.barPosRight -= 5;
+                            this.barPosRight -= barSpeed;
                         }
                     } else {
                         if ((barPosRight + (barHeightRight / 2)) < 1000) {
-                            this.barPosRight += 5;
+                            this.barPosRight += barSpeed;
                         }
                     }
                 }
@@ -184,12 +200,7 @@ public class MyPongModel implements PongModel{
             /* deciding if the ball hits a bar */
             if (ballPosX >= 980) {
                 if (barHit("right")) {
-                    decideCurveHit(input);
-                    decideCornerHit();
-                    this.ballSpeedY = this.ballSpeedY * 1.1;
-                    this.ballSpeedX = this.ballSpeedX * 1.1;
-                    this.ballSpeedX = ((this.ballSpeedX) * -1);
-                    setMessage(null);
+                    barHitCompute(input);
                 } else {
                     Integer tempScore = Integer.parseInt(scoreLeft) + 1;
                     this.scoreLeft = Integer.toString(tempScore);
@@ -198,25 +209,19 @@ public class MyPongModel implements PongModel{
                     ballPos = new Point(ballPosX, ballPosY);
                     barPosLeft = 500;
                     barPosRight = 500;
-                    if (this.scoreLeft.equals("10")){
+                    if (this.scoreLeft.equals("10")) {
                         setMessage(leftPlayerName + " wins!");
-                        
-                    }else {
+
+                    } else {
                         setMessage(leftPlayerName + " scores!");
                     }
-                    this.barHeightRight -= 10;
-                    this.barHeightLeft += 10;
+                    this.barHeightLeft -= 7;
                     this.genStartDir = true;
                 }
             }
             if (ballPosX <= 20) {
-                if (barHit("left")){
-                    decideCurveHit(input);
-                    decideCornerHit();
-                    this.ballSpeedY = this.ballSpeedY * 1.1;
-                    this.ballSpeedX = this.ballSpeedX * 1.1;
-                    this.ballSpeedX = ((this.ballSpeedX) * -1);
-                    setMessage(null);
+                if (barHit("left")) {
+                    barHitCompute(input);
                 } else {
                     Integer tempScore = Integer.parseInt(scoreRight) + 1;
                     this.scoreRight = Integer.toString(tempScore);
@@ -225,14 +230,13 @@ public class MyPongModel implements PongModel{
                     ballPos = new Point(ballPosX, ballPosY);
                     barPosLeft = 500;
                     barPosRight = 500;
-                    if (this.scoreRight.equals("10")){
+                    if (this.scoreRight.equals("10")) {
                         setMessage(rightPlayerName + " wins!");
 
-                    }else {
+                    } else {
                         setMessage(rightPlayerName + " scores!");
                     }
-                    this.barHeightLeft -= 10;
-                    this.barHeightRight += 10;
+                    this.barHeightRight -= 7;
                     this.genStartDir = true;
                 }
             }
@@ -250,6 +254,9 @@ public class MyPongModel implements PongModel{
             this.ballPos = new Point(ballPosX, ballPosY);
             if (wallHitCount > 0) {
                 this.wallHitCount -= 1;
+            }
+            if (barHitCount > 0){
+                this.barHitCount -= 1;
             }
         }
     }
