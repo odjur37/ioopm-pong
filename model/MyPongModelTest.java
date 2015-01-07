@@ -14,24 +14,39 @@ public class MyPongModelTest {
     
     @Test
     public void testResetAfterScore() throws Exception {
-
+        testModel.resetAfterScore();
+        assertTrue(3 == testModel.getBallSpeedX());
+        assertTrue(5 == testModel.getBarSpeed());
     }
 
     @Test
     public void testBarHit() throws Exception {
-        testModel.setBallPosY(20);
+        testModel.setBallPosY(414);
         boolean barHit = testModel.barHit("left");
+        assertFalse(barHit);
+        testModel.setBallPosY(415);
+        barHit = testModel.barHit("left");
         assertTrue(barHit);
+        testModel.setBallPosY(585);
+        barHit = testModel.barHit("left");
+        assertTrue(barHit);
+        testModel.setBallPosY(586);
+        barHit = testModel.barHit("left");
+        assertFalse(barHit);
     }
 
     @Test
     public void testDecideCornerHit() throws Exception {
-
+        testModel.setBallPosY(420);
+        testModel.setBallSpeedY(-4);
+        testModel.decideCornerHit();
+        //assertTrue(4 == testModel.getBallSpeedY());
+        System.out.printf("%f\n",testModel.getBallSpeedY());
     }
 
     @Test
     public void testDecideCurveHit() throws Exception {
-
+    
     }
 
     @Test
