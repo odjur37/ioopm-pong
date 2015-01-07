@@ -33,12 +33,16 @@ public class MyPongModelTest {
 
     @Test
     public void testDecideCornerHit() throws Exception {
-
+        testModel.setBallPosY(420);
+        testModel.setBallSpeedY(-4);
+        testModel.decideCornerHit();
+        //assertTrue(4 == testModel.getBallSpeedY());
+        System.out.printf("%f\n",testModel.getBallSpeedY());
     }
 
     @Test
     public void testDecideCurveHit() throws Exception {
-
+    
     }
 
     @Test

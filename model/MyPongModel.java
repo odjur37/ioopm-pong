@@ -90,22 +90,22 @@ public class MyPongModel implements PongModel{
         if (((ballPosY - 10) <= barPosRight + (barHeightRight / 2)) &&
                 ((ballPosY - 10) >= (barPosRight + (barHeightRight / 2)) - 10) &&
                 (ballSpeedY <= 0)) {
-            this.ballSpeedY = this.ballSpeedY * -1;
+            this.ballSpeedY = this.ballSpeedY * -1.0;
         }
         if (((ballPosY + 10) >= barPosRight - (barHeightRight / 2)) &&
                 ((ballPosY + 10) <= (barPosRight - (barHeightRight / 2)) + 10) &&
                 (ballSpeedY >= 0)) {
-            this.ballSpeedY = this.ballSpeedY * -1;
+            this.ballSpeedY = this.ballSpeedY * -1.0;
         }
         if (((ballPosY - 10) <= barPosLeft + (barHeightLeft / 2)) &&
                 ((ballPosY - 10) >= (barPosLeft + (barHeightLeft / 2)) - 10) &&
                 (ballSpeedY <= 0)) {
-            this.ballSpeedY = this.ballSpeedY * -1;
+            this.ballSpeedY = this.ballSpeedY * -1.0;
         }
         if (((ballPosY + 10) >= barPosLeft - (barHeightLeft / 2)) &&
                 ((ballPosY + 10) <= (barPosLeft - (barHeightLeft / 2)) + 10) &&
                 (ballSpeedY >= 0)) {
-            this.ballSpeedY = this.ballSpeedY * -1;
+            this.ballSpeedY = this.ballSpeedY * -1.0;
         }
     }
 
