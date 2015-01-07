@@ -10,7 +10,9 @@ public class MyPongModelTest {
     
     @Test
     public void testResetAfterScore() throws Exception {
-        
+        testModel.resetAfterScore();
+        assertTrue(3 == testModel.getBallSpeedX());
+        assertTrue(5 == testModel.getBarSpeed());
     }
 
     @Test

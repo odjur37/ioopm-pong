@@ -331,6 +331,78 @@ public class MyPongModel implements PongModel{
         return this.fieldSize;
     }
 
+    public String getLeftPlayerName() {
+        return leftPlayerName;
+    }
+
+    public String getRightPlayerName() {
+        return rightPlayerName;
+    }
+
+    public boolean isGenStartDir() {
+        return genStartDir;
+    }
+
+    public int getBarPosLeft() {
+        return barPosLeft;
+    }
+
+    public int getBarPosRight() {
+        return barPosRight;
+    }
+
+    public int getBarHeightLeft() {
+        return barHeightLeft;
+    }
+
+    public int getBarHeightRight() {
+        return barHeightRight;
+    }
+
+    public double getBarSpeed() {
+        return barSpeed;
+    }
+
+    public int getBallPosX() {
+        return ballPosX;
+    }
+
+    public int getBallPosY() {
+        return ballPosY;
+    }
+
+    public String getScoreLeft() {
+        return scoreLeft;
+    }
+
+    public String getScoreRight() {
+        return scoreRight;
+    }
+
+    public double getBallSpeedX() {
+        return ballSpeedX;
+    }
+
+    public double getBallSpeedY() {
+        return ballSpeedY;
+    }
+
+    public int getCurveBallCount() {
+        return curveBallCount;
+    }
+
+    public int getWallHitCount() {
+        return wallHitCount;
+    }
+
+    public int getBarHitCount() {
+        return barHitCount;
+    }
+
+    public String getCurveBallDirection() {
+        return curveBallDirection;
+    }
+
     public void setMessage(String msg){
         this.message = msg;
     }
