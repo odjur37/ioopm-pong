@@ -122,19 +122,19 @@ public class MyPongModel implements PongModel{
         for (Input eachSet : input) {
             if (eachSet.key.equals(BarKey.LEFT)) {
                 if (eachSet.dir.equals(Input.Dir.UP)) {
-                    this.curveBallCount = 100;
+                    this.curveBallCount = 50;
                     this.curveBallDirection = "DOWN";
                 } else if (eachSet.dir.equals(Input.Dir.DOWN)) {
-                    this.curveBallCount = 100;
+                    this.curveBallCount = 50;
                     this.curveBallDirection = "UP";
                 }
             }
             if (eachSet.key.equals(BarKey.RIGHT)) {
                 if (eachSet.dir.equals(Input.Dir.UP)) {
-                    this.curveBallCount = 100;
+                    this.curveBallCount = 50;
                     this.curveBallDirection = "DOWN";
                 } else if (eachSet.dir.equals(Input.Dir.DOWN)) {
-                    this.curveBallCount = 100;
+                    this.curveBallCount = 50;
                     this.curveBallDirection = "UP";
                 }
             }
