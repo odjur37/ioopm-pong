@@ -10,14 +10,23 @@ public class MyPongModelTest {
     
     @Test
     public void testResetAfterScore() throws Exception {
-
+        
     }
 
     @Test
     public void testBarHit() throws Exception {
-        testModel.setBallPosY(20);
+        testModel.setBallPosY(414);
         boolean barHit = testModel.barHit("left");
+        assertFalse(barHit);
+        testModel.setBallPosY(415);
+        barHit = testModel.barHit("left");
         assertTrue(barHit);
+        testModel.setBallPosY(585);
+        barHit = testModel.barHit("left");
+        assertTrue(barHit);
+        testModel.setBallPosY(586);
+        barHit = testModel.barHit("left");
+        assertFalse(barHit);
     }
 
     @Test
