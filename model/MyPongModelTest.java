@@ -6,6 +6,8 @@ import static org.junit.Assert.*;
 
 public class MyPongModelTest {
 
+    public MyPongModel testModel = new MyPongModel("pl1","pl2");
+    
     @Test
     public void testResetAfterScore() throws Exception {
 
@@ -13,7 +15,9 @@ public class MyPongModelTest {
 
     @Test
     public void testBarHit() throws Exception {
-
+        testModel.setBallPosY(20);
+        boolean barHit = testModel.barHit("left");
+        assertTrue(barHit);
     }
 
     @Test

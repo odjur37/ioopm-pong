@@ -265,7 +265,6 @@ public class MyPongModel implements PongModel{
         this.leftPlayerName = p1;
         this.rightPlayerName = p2;
     }
-
     public int getBarPos(BarKey k){
         if(k.equals(BarKey.LEFT)){
             return this.barPosLeft;  
@@ -284,9 +283,6 @@ public class MyPongModel implements PongModel{
         return this.ballPos;
     }
     
-    public void setMessage(String msg){
-        this.message = msg;
-    }
     public String getMessage(){
         return this.message;
     }
@@ -301,4 +297,90 @@ public class MyPongModel implements PongModel{
     public Dimension getFieldSize(){
         return this.fieldSize;
     }
+
+    public void setMessage(String msg){
+        this.message = msg;
+    }
+
+    public void setLeftPlayerName(String leftPlayerName) {
+        this.leftPlayerName = leftPlayerName;
+    }
+
+    public void setRightPlayerName(String rightPlayerName) {
+        this.rightPlayerName = rightPlayerName;
+    }
+
+    public void setGenStartDir(boolean genStartDir) {
+        this.genStartDir = genStartDir;
+    }
+
+    public void setBarPosLeft(int barPosLeft) {
+        this.barPosLeft = barPosLeft;
+    }
+
+    public void setBarPosRight(int barPosRight) {
+        this.barPosRight = barPosRight;
+    }
+
+    public void setBarHeightLeft(int barHeightLeft) {
+        this.barHeightLeft = barHeightLeft;
+    }
+
+    public void setBarHeightRight(int barHeightRight) {
+        this.barHeightRight = barHeightRight;
+    }
+
+    public void setBarSpeed(double barSpeed) {
+        this.barSpeed = barSpeed;
+    }
+
+    public void setBallPosX(int ballPosX) {
+        this.ballPosX = ballPosX;
+    }
+
+    public void setBallPosY(int ballPosY) {
+        this.ballPosY = ballPosY;
+    }
+
+    public void setBallPos(Point ballPos) {
+        this.ballPos = ballPos;
+    }
+
+    public void setScoreLeft(String scoreLeft) {
+        this.scoreLeft = scoreLeft;
+    }
+
+    public void setScoreRight(String scoreRight) {
+        this.scoreRight = scoreRight;
+    }
+
+    public void setBallSpeedX(double ballSpeedX) {
+        this.ballSpeedX = ballSpeedX;
+    }
+
+    public void setBallSpeedY(double ballSpeedY) {
+        this.ballSpeedY = ballSpeedY;
+    }
+
+    public void setCurveBallCount(int curveBallCount) {
+        this.curveBallCount = curveBallCount;
+    }
+
+    public void setWallHitCount(int wallHitCount) {
+        this.wallHitCount = wallHitCount;
+    }
+
+    public void setBarHitCount(int barHitCount) {
+        this.barHitCount = barHitCount;
+    }
+
+    public void setCurveBallDirection(String curveBallDirection) {
+        this.curveBallDirection = curveBallDirection;
+    }
+
+    public void setFieldSize(Dimension fieldSize) {
+        this.fieldSize = fieldSize;
+    }
+
+
 }
