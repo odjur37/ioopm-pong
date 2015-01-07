@@ -31,7 +31,11 @@ public class MyPongModel implements PongModel{
     private int barHitCount = 0;
     private String curveBallDirection = "NONE";
     private Dimension fieldSize = new Dimension(1000, 1000);
-    
+
+    /**
+     * Resets the position of the bars and the position of the ball after someone scoring a goal.
+     * It also generates the starting movement of the ball.
+     */
     public void resetAfterScore() {
         this.ballSpeedX = 3;
         Random rand1 = new Random();
@@ -51,7 +55,12 @@ public class MyPongModel implements PongModel{
         }
         this.barSpeed = 5;
     }
-    
+
+    /**
+     * Decides if the ball hits a bar or not.
+     * @param side A string telling which of the bars to compute.
+     * @return true if the ball hit the bar, false if it's not a hit.
+     */
     public boolean barHit(String side){
         switch (side){
             case "left":
@@ -73,6 +82,10 @@ public class MyPongModel implements PongModel{
             }
     }
 
+    /**
+     * Decides if the ball hits a corner of a bar. If it does the ball is sent in the same
+     * direction it came from.
+     */
     public void decideCornerHit () {
         if (((ballPosY - 10) <= barPosRight + (barHeightRight / 2)) &&
                 ((ballPosY - 10) >= (barPosRight + (barHeightRight / 2)) - 10) &&
@@ -96,6 +109,10 @@ public class MyPongModel implements PongModel{
         }
     }
 
+    /**
+     * Decides if the ball should be curved or not.
+     * @param input A Set-array containing user input.
+     */
     public void decideCurveHit(Set<Input> input) {
         for (Input eachSet : input) {
             if (eachSet.key.equals(BarKey.LEFT)) {
@@ -118,8 +135,12 @@ public class MyPongModel implements PongModel{
             }
         }
     }
- 
 
+
+    /**
+     * Curves the ball.
+     * @param direction A string telling which direction the ball should be curved.
+     */
     public void curveBall (String direction) {
         if (curveBallCount > 0) {
             if (direction.equals("UP")){
@@ -132,7 +153,10 @@ public class MyPongModel implements PongModel{
             }
         }
     }
-    
+
+    /**
+     * Resets the game.
+     */
     public void resetGame(){
         this.scoreRight = "0";
         this.scoreLeft = "0";
@@ -143,7 +167,11 @@ public class MyPongModel implements PongModel{
         }catch (Exception ignore){}
         setMessage("GAME ON!");
     }
-    
+
+    /**
+     * Sets the ball in the right direction after a barhit.
+     * @param input A Set-array containing user-input.
+     */
     public void barHitCompute(Set<Input> input) {
         //decideCurveHit(input);
         decideCornerHit();
@@ -156,7 +184,12 @@ public class MyPongModel implements PongModel{
             this.barHitCount += 50;
         }
     }
-    
+
+    /**
+     * The engine of the game that computes the position of the ball and the bars.
+     * @param input
+     * @param delta_t
+     */
     public void compute(Set<Input> input, long delta_t) {
         if (genStartDir){
             resetAfterScore();
