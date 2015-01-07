@@ -305,10 +305,6 @@ public class MyPongModel implements PongModel{
         return this.barPosRight;
     }
 
-    public int getBarHitCount() {
-        return barHitCount;
-    }
-
     public int getBarHeight(BarKey k){
         if(k.equals(BarKey.LEFT)){
             return this.barHeightLeft;
@@ -316,20 +312,8 @@ public class MyPongModel implements PongModel{
         return this.barHeightRight;
     }
 
-    public double getBarSpeed() {
-        return barSpeed;
-    }
-
     public Point getBallPos(){
         return this.ballPos;
-    }
-
-    public double getBallSpeedX() {
-        return ballSpeedX;
-    }
-
-    public double getBallSpeedY() {
-        return ballSpeedY;
     }
 
     public String getMessage(){

@@ -15,8 +15,7 @@ public class MyPongModelTest {
     @Test
     public void testResetAfterScore() throws Exception {
         testModel.resetAfterScore();
-        assertTrue(3 == testModel.getBallSpeedX());
-        assertTrue(5 == testModel.getBarSpeed());
+        assertEquals(5.0, testModel.getBarSpeed(), 0.0);
     }
 
     @Test
@@ -37,11 +36,15 @@ public class MyPongModelTest {
 
     @Test
     public void testDecideCornerHit() throws Exception {
-        testModel.setBallPosY(420);
-        testModel.setBallSpeedY(-4);
-        testModel.decideCornerHit();
-        //assertTrue(4 == testModel.getBallSpeedY());
-        System.out.printf("%f\n",testModel.getBallSpeedY());
+        MyPongModel tm2 = new MyPongModel("p1", "p2");
+        tm2.setBarPosLeft(500);
+        tm2.setBallPosY(580);
+        tm2.setBallSpeedY((4.0)*-1.0);
+        tm2.setBarHeightLeft(150);
+        tm2.decideCornerHit();
+        double speedY = tm2.getBallSpeedY();
+        assertEquals(4.0, speedY, 0.0);
+
     }
 
     @Test
