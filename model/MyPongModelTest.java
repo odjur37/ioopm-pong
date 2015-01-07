@@ -95,15 +95,11 @@ public class MyPongModelTest {
         testModel.setScoreRight("6");
         testModel.setBarHeightLeft(90);
         testModel.setBarHeightRight(50);
+        testModel.resetGame();
         String leftScore = testModel.getScore(BarKey.LEFT);
         String rightScore = testModel.getScore(BarKey.RIGHT);
         int leftBarHeight = testModel.getBarHeight(BarKey.LEFT);
         int rightBarHeight = testModel.getBarHeight(BarKey.RIGHT);
-        testModel.resetGame();
-        leftScore = testModel.getScore(BarKey.LEFT);
-        rightScore = testModel.getScore(BarKey.RIGHT);
-        leftBarHeight = testModel.getBarHeight(BarKey.LEFT);
-        rightBarHeight = testModel.getBarHeight(BarKey.RIGHT);
         assertEquals("0", leftScore);
         assertEquals("0", rightScore);
         assertEquals(150, leftBarHeight);
@@ -112,7 +108,6 @@ public class MyPongModelTest {
 
     @Test
     public void testBarHitCompute() throws Exception {
-        Input t1 = new Input(BarKey.LEFT, Input.Dir.DOWN);
         Set<Input> input = new HashSet<Input>();
         double xSpeed = 1.0;
         double ySpeed = 1.0;
