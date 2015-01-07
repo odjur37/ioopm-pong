@@ -39,7 +39,7 @@ public class MyPongModelTest {
         MyPongModel tm2 = new MyPongModel("p1", "p2");
         tm2.setBarPosLeft(500);
         tm2.setBallPosY(580);
-        tm2.setBallSpeedY((4.0)*-1.0);
+        tm2.setBallSpeedY((4.0) * -1.0);
         tm2.setBarHeightLeft(150);
         tm2.decideCornerHit();
         double speedY = tm2.getBallSpeedY();
@@ -49,12 +49,44 @@ public class MyPongModelTest {
 
     @Test
     public void testDecideCurveHit() throws Exception {
-    
+
     }
 
     @Test
     public void testCurveBall() throws Exception {
+        testModel.setCurveBallCount(50);
+        testModel.resetGame();
+        testModel.resetAfterScore();
+        double speedY = 1.0;
+        testModel.setBallSpeedY(speedY);
+        testModel.curveBall("UP");
+        double expectedSpeedY = speedY - 0.06;
+        speedY = testModel.getBallSpeedY();
 
+        assertEquals(expectedSpeedY, speedY, 0.0);
+
+        testModel.curveBall("UP");
+        expectedSpeedY = speedY - 0.06;
+        speedY = testModel.getBallSpeedY();
+
+        assertEquals(expectedSpeedY, speedY, 0.0);
+
+        speedY = 1.0;
+        testModel.setBallSpeedY(speedY);
+
+        testModel.curveBall("DOWN");
+        expectedSpeedY = speedY + 0.06;
+        speedY = testModel.getBallSpeedY();
+
+        assertEquals(expectedSpeedY, speedY, 0.0);
+
+        testModel.curveBall("DOWN");
+        expectedSpeedY = speedY + 0.06;
+        speedY = testModel.getBallSpeedY();
+
+        assertEquals(expectedSpeedY, speedY, 0.0);
+
+        testModel.setCurveBallCount(0);
     }
 
     @Test

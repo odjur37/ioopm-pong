@@ -178,7 +178,7 @@ public class MyPongModel implements PongModel{
      * @param input A Set-array containing user-input.
      */
     public void barHitCompute(Set<Input> input) {
-        //decideCurveHit(input);
+        decideCurveHit(input);
         decideCornerHit();
         if (barHitCount == 0) {
             this.ballSpeedY = this.ballSpeedY * 1.07;
