@@ -54,6 +54,11 @@ public class MyPongModel implements PongModel{
             this.ballSpeedX = this.ballSpeedX * -1;
         }
         this.barSpeed = 5;
+        ballPosX = 500;
+        ballPosY = 500;
+        ballPos = new Point(ballPosX, ballPosY);
+        barPosLeft = 500;
+        barPosRight = 500;
     }
 
     /**
@@ -237,11 +242,6 @@ public class MyPongModel implements PongModel{
                 } else {
                     Integer tempScore = Integer.parseInt(scoreLeft) + 1;
                     this.scoreLeft = Integer.toString(tempScore);
-                    ballPosX = 500;
-                    ballPosY = 500;
-                    ballPos = new Point(ballPosX, ballPosY);
-                    barPosLeft = 500;
-                    barPosRight = 500;
                     if (this.scoreLeft.equals("10")) {
                         setMessage(leftPlayerName + " wins!");
 
@@ -258,11 +258,6 @@ public class MyPongModel implements PongModel{
                 } else {
                     Integer tempScore = Integer.parseInt(scoreRight) + 1;
                     this.scoreRight = Integer.toString(tempScore);
-                    ballPosX = 500;
-                    ballPosY = 500;
-                    ballPos = new Point(ballPosX, ballPosY);
-                    barPosLeft = 500;
-                    barPosRight = 500;
                     if (this.scoreRight.equals("10")) {
                         setMessage(rightPlayerName + " wins!");
 
